@@ -19,13 +19,13 @@ const Login = () => {
         {currentState === 'Login' ? '' : <input type="text" className='w-full px-3 py-2 border border-gray-800 rounded-md' placeholder='Name' required />}
         <input type="email" className='w-full px-3 py-2 border border-gray-800 rounded-md' placeholder='Email' required />
         <input type="password" className='w-full px-3 py-2 border border-gray-800 rounded-md' placeholder='Password' required />
-        <div className='w-full flex justify-between text-sm mt-[-8px]'>
+        <div className='w-full flex justify-between text-xs sm:text-sm mt-[-8px]'>
           <p className='cursor-pointer'>Forgot your password?</p>
           {
-            currentState === 'Login' ? <p onClick={() => setCurrentState('Sign Up')} className='cursor-pointer'>Don't have an account? <span className='text-rose-400'>Sign Up</span></p> : <p onClick={() => setCurrentState('Login')} className='cursor-pointer'>Already have an account? <span className='text-rose-400'>Login</span></p>
+            currentState === 'Login' ? <p onClick={() => setCurrentState('Sign Up')} className='cursor-pointer'>Don't have an account? <span className='text-[#57201b]/70'>Sign Up</span></p> : <p onClick={() => setCurrentState('Login')} className='cursor-pointer'>Already have an account? <span className='text-[#57201b]/70'>Login</span></p>
           }
         </div>
-        <button className='bg-rose-400 text-white fon-light h-16 px-8 py-2 mt-4 w-full rounded-full'>{currentState === 'Login' ? 'Sign In' : 'Sign Up'}</button>
+        <button className='bg-black text-white fon-light h-16 px-8 py-2 mt-4 w-full rounded-full'>{currentState === 'Login' ? 'Sign In' : 'Sign Up'}</button>
       </form>
     </AuthUi>
   )
