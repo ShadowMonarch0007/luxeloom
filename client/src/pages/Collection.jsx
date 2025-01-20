@@ -110,7 +110,7 @@ const Collection = () => {
             <option value="high-low">Sort by : High to Low</option>
           </select>
         </div>
-        <div className='overflow-auto h-[80vh]'>
+        <div className='md:overflow-auto md:h-[80vh]'>
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
             {
               filterProducts.map((item, index) => (

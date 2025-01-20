@@ -33,7 +33,7 @@ const Cart = () => {
         <Title text1={'your'} text2={'cart'} />
       </div>
       <div className='flex flex-col sm:flex-row gap-5 sm:gap-20'>
-        <div className='w-full h-[75vh] overflow-auto'>
+        <div className='w-full md:h-[75vh] md:overflow-auto'>
           {
             cartData.map((item, index) => {
               const productData = products.find((product) => product._id === item._id);
