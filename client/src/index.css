@@ -25,7 +25,7 @@ a.active hr {
 }
 
 ::-webkit-scrollbar{
-  display: none;
+  @apply hidden;
 }
 
 @media (max-width:640px) {
