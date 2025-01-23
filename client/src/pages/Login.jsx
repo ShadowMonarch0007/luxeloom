@@ -25,7 +25,7 @@ const Login = () => {
             currentState === 'Login' ? <p onClick={() => setCurrentState('Sign Up')} className='cursor-pointer'>Don't have an account? <span className='text-[#57201b]/70'>Sign Up</span></p> : <p onClick={() => setCurrentState('Login')} className='cursor-pointer'>Already have an account? <span className='text-[#57201b]/70'>Login</span></p>
           }
         </div>
-        <button className='bg-black text-white fon-light h-16 px-8 py-2 mt-4 w-full rounded-full'>{currentState === 'Login' ? 'Sign In' : 'Sign Up'}</button>
+        <button className='bg-black text-white font-light h-16 px-8 py-2 mt-4 w-full rounded-full'>{currentState === 'Login' ? 'Sign In' : 'Sign Up'}</button>
       </form>
     </AuthUi>
   )
