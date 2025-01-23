@@ -162,7 +162,7 @@ const Add = ({ token }) => {
             <div className='w-28 py-3 mt-4 bg-black text-white flex items-center justify-center'><LoaderCircle size={24} className='animate-spin' /></div> :
             <button type='submit' className='w-28 py-3 mt-4 bg-black text-white'>Add</button>
         }
-      </div>
+      </div> 
     </form>
   )
 }

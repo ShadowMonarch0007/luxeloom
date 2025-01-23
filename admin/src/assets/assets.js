@@ -5,6 +5,7 @@ import upload_area from './upload_area.png'
 import parcel_icon from './parcel_icon.svg'
 import auth_bg1 from './auth-bg1.png'
 import auth_bg2 from './auth-bg2.png'
+import avatar from './avatar.png'
 
 export const assets = {
     logo,
@@ -13,6 +14,7 @@ export const assets = {
     upload_area,
     parcel_icon,
     auth_bg1,
-    auth_bg2
+    auth_bg2,
+    avatar
 }
 

@@ -21,7 +21,7 @@ const Sidebar = () => {
             </div>
             <div className='md:px-5 text-lg'>
                 <div className='flex items-center justify-center md:gap-3 md:bg-[#ffdbd7] md:border md:border-[#b28878] p-0 md:p-3 rounded-full'>
-                    <div className='w-10 h-10 md:w-14 md:h-14 bg-black rounded-full'></div>
+                    <img src={assets.avatar} alt="" className='w-10 h-10 md:w-14 md:h-14 rounded-full' />
                     <div className='hidden md:block'>
                         <div className='flex flex-col'>
                             <p className='text-gray-800'> Admin</p>
