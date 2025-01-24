@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { ShopContext } from '../context/ShopContext'
+import React, { useContext, useEffect, useState } from 'react';
+import { ShopContext } from '../context/ShopContext';
 import { assets } from '../assets/assets';
 import Title from '../components/Title';
 import ProductItem from '../components/ProductItem';
@@ -12,22 +12,23 @@ const Collection = () => {
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState('relavent');
+  const [loading, setLoading] = useState(true);
 
   const toggleCategory = (e) => {
     if (category.includes(e.target.value)) {
-      setCategory(prev => prev.filter(item => item !== e.target.value))
+      setCategory(prev => prev.filter(item => item !== e.target.value));
     } else {
-      setCategory(prev => [...prev, e.target.value])
+      setCategory(prev => [...prev, e.target.value]);
     }
-  }
+  };
 
   const toggleSubCategory = (e) => {
     if (subCategory.includes(e.target.value)) {
-      setSubCategory(prev => prev.filter(item => item !== e.target.value))
+      setSubCategory(prev => prev.filter(item => item !== e.target.value));
     } else {
-      setSubCategory(prev => [...prev, e.target.value])
+      setSubCategory(prev => [...prev, e.target.value]);
     }
-  }
+  };
 
   const applyFilter = () => {
     let productsCopy = products.slice();
@@ -41,7 +42,7 @@ const Collection = () => {
       productsCopy = productsCopy.filter(item => subCategory.includes(item.subCategory));
     }
     setFilterProducts(productsCopy);
-  }
+  };
 
   const sortProduct = () => {
     let filterProductCopy = filterProducts.slice();
@@ -56,20 +57,23 @@ const Collection = () => {
         applyFilter();
         break;
     }
-  }
+  };
 
   useEffect(() => {
+    setLoading(true);
     applyFilter();
+    setLoading(false);
   }, [category, subCategory, search, showSearch, products]);
 
   useEffect(() => {
     sortProduct();
-  }, [sortType])
+  }, [sortType]);
 
   return (
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
       <div className='min-w-60'>
-        <p onClick={() => setShowFilter(!showFilter)} className='uppercase my-2 text-xl flex items-center cursor-pointer gap-2'>Filters
+        <p onClick={() => setShowFilter(!showFilter)} className='uppercase my-2 text-xl flex items-center cursor-pointer gap-2'>
+          Filters
           <img src={assets.dropdown_icon} alt="" className={`h-3 sm:hidden' ${showFilter ? 'rotate-90' : ''} sm:rotate-0`} />
         </p>
         <div className={`border border-gray-300 pl-5 py-3 mt-6 ${showFilter ? '' : 'hidden'} sm:block`}>
@@ -101,6 +105,7 @@ const Collection = () => {
           </div>
         </div>
       </div>
+
       <div className='flex-1'>
         <div className='flex justify-between text-base sm:text-2xl mb-4'>
           <Title text1={'all'} text2={'collections'} />
@@ -110,18 +115,30 @@ const Collection = () => {
             <option value="high-low">Sort by : High to Low</option>
           </select>
         </div>
-        <div className='md:overflow-auto md:h-[80vh]'>
+
+        <div className='md:overflow-auto md:max-h-[80vh]'>
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
             {
-              filterProducts.map((item, index) => (
-                <ProductItem key={index} id={item._id} name={item.name} price={item.price} image={item.image} />
-              ))
+              loading ?
+                Array.from({ length: 8 }).map((_, index) => (
+                  <div key={index} className="animate-pulse">
+                    <div className="overflow-hidden bg-gray-300 h-48 w-full rounded-md"></div>
+                    <div className="pt-3 pb-1 bg-gray-300 h-4 mt-2 w-2/3 rounded-md"></div>
+                    <div className="text-sm font-medium flex items-center mt-2">
+                      <div className="bg-gray-300 h-4 w-12 rounded-md"></div>
+                    </div>
+                  </div>
+                ))
+                :
+                filterProducts.map((item, index) => (
+                  <ProductItem key={index} id={item._id} name={item.name} price={item.price} image={item.image} />
+                ))
             }
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Collection
+export default Collection;
