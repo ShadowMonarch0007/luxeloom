@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { assets } from '../assets/assets'
-import { Package, PackagePlus, ShoppingCart, LayoutDashboard, Podcast } from 'lucide-react';
+import { Package, PackagePlus, ShoppingCart, LayoutDashboard, Podcast, Star, Mail } from 'lucide-react';
 
 const Sidebar = () => {
     return (
@@ -23,10 +23,18 @@ const Sidebar = () => {
                     <div><ShoppingCart size={24} /></div>
                     <p className='hidden md:block'>Orders</p>
                 </NavLink>
-                {/* <NavLink to={'/order'} className='flex items-center gap-3 border border-gray-300 border-r-0 px-3 py-2 rounded-lg'>
+                <NavLink to={'/subscriber'} className='flex items-center gap-3 border border-gray-300 border-r-0 px-3 py-2 rounded-lg'>
                     <div><Podcast size={24} /></div>
                     <p className='hidden md:block'>Subscribers</p>
-                </NavLink> */}
+                </NavLink>
+                <NavLink to={'/review'} className='flex items-center gap-3 border border-gray-300 border-r-0 px-3 py-2 rounded-lg'>
+                    <div><Star size={24} /></div>
+                    <p className='hidden md:block'>Reviews</p>
+                </NavLink>
+                <NavLink to={'/message'} className='flex items-center gap-3 border border-gray-300 border-r-0 px-3 py-2 rounded-lg'>
+                    <div><Mail size={24} /></div>
+                    <p className='hidden md:block'>Messages</p>
+                </NavLink>
             </div>
             <div className='md:px-5 text-lg'>
                 <div className='flex items-center justify-center md:gap-3 md:bg-[#ffdbd7] md:border md:border-[#b28878] p-0 md:p-3 rounded-full'>
