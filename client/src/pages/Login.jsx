@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import AuthUi from '../components/AuthUi';
 import { ShopContext } from '../context/ShopContext';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { toast } from 'react-toastify'; 
+import { Loader2 } from 'lucide-react';
 
 const Login = () => {
 
@@ -64,7 +65,13 @@ const Login = () => {
             currentState === 'Login' ? <p>Don't have an account? <span onClick={() => setCurrentState('Sign Up')} className='text-[#57201b]/70 cursor-pointer'>Sign Up</span></p> : <p>Already have an account? <span onClick={() => setCurrentState('Login')} className='text-[#57201b]/70 cursor-pointer'>Login</span></p>
           }
         </div>
-        <button className='bg-black text-white font-light h-16 px-8 py-2 mt-2 w-full rounded-full'>{currentState === 'Login' ? 'Sign In' : 'Sign Up'}</button>
+        {
+          loading ? (
+            <button className='bg-black text-white font-light h-16 px-8 py-2 mt-2 w-full rounded-full flex items-center justify-center'><Loader2 size={32} className='animate-spin'/></button>
+          ) : (
+            <button className='bg-black text-white font-light h-16 px-8 py-2 mt-2 w-full rounded-full'>{currentState === 'Login' ? 'Sign In' : 'Sign Up'}</button>
+          )
+        }
         <div className='text-xs sm:text-sm mt-4 flex gap-1 justify-end items-end'>
           <p>Are you an admin?</p>
           <a href='http://localhost:5174' target='_blank' rel="noopener noreferrer" className='text-[#57201b]/70'>Login</a>
