@@ -1,13 +1,52 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AuthUi from '../components/AuthUi';
+import { ShopContext } from '../context/ShopContext';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
   const [currentState, setCurrentState] = useState('Login');
+  const { token, setToken, navigate, backendUrl } = useContext(ShopContext);
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    try {
+      if (currentState === 'Sign Up') {
+        const response = await axios.post(backendUrl + '/api/user/register', { name, email, password });
+        if (response.data.success) {
+          setToken(response.data.token);
+          localStorage.setItem('token', response.data.token);
+        } else {
+          toast.error(response.data.message);
+        }
+      } else {
+        const response = await axios.post(backendUrl + '/api/user/login', { email, password });
+        if (response.data.success) {
+          setToken(response.data.token);
+          localStorage.setItem('token', response.data.token);
+        } else {
+          toast.error(response.data.message);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+
+    } finally {
+      setLoading(false);
+    }
   }
+  useEffect(() => {
+    if (token) {
+      navigate('/');
+    }
+  }, [token])
 
   return (
     <AuthUi>
@@ -16,9 +55,9 @@ const Login = () => {
           <p className='prata-regular text-3xl'>{currentState}</p>
           <hr className='border-none h-[1.5px] w-8 bg-gray-800' />
         </div>
-        {currentState === 'Login' ? '' : <input type="text" className='w-full px-3 py-2 border border-gray-800 rounded-md' placeholder='Name' required />}
-        <input type="email" className='w-full px-3 py-2 border border-gray-800 rounded-md' placeholder='Email' required />
-        <input type="password" className='w-full px-3 py-2 border border-gray-800 rounded-md' placeholder='Password' required />
+        {currentState === 'Login' ? '' : <input onChange={(e) => setName(e.target.value)} value={name} type="text" className='w-full px-3 py-2 border border-gray-800 rounded-md' placeholder='Name' required />}
+        <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" className='w-full px-3 py-2 border border-gray-800 rounded-md' placeholder='Email' required />
+        <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" className='w-full px-3 py-2 border border-gray-800 rounded-md' placeholder='Password' required />
         <div className='w-full flex flex-col md:flex-row gap-2 justify-between items-center text-xs sm:text-sm mt-[-4px]'>
           <p className='cursor-pointer'>Forgot your password? <span className='text-[#57201b]/70 cursor-pointer'>Reset</span></p>
           {

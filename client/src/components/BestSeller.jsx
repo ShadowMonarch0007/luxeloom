@@ -36,7 +36,7 @@ const BestSeller = () => {
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
                 {
-                    loading ?
+                    loading || bestSeller.length === 0 ?
                         Array.from({ length: screenSize < 768 ? 6 : 5 }).map((_, index) => (
                             <div key={index} className="animate-pulse">
                                 <div className="overflow-hidden bg-gray-300 h-48 w-full rounded-md"></div>

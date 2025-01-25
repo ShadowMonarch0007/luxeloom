@@ -13,11 +13,23 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import SearchBar from './components/SearchBar';
 import { ToastContainer } from 'react-toastify';
+import { FloatingDock } from './components/FloatingDock';
+// import { IconHomeFilled, IconHanger2Filled, IconPhoneFilled } from '@tabler/icons-react';
+import { House, Shirt, BookOpen, Phone } from 'lucide-react';
+
+const Items = [
+  { title: 'Home', icon: <House />, href: '/' },
+  { title: 'Collection', icon: <Shirt />, href: '/collection' },
+  { title: 'About', icon: <BookOpen />, href: '/about' },
+  { title: 'Contact', icon: <Phone />, href: '/contact' },
+];
 
 const App = () => {
   const location = useLocation();
   const hideNavFooterPages = ['/login'];
-  const containerClasses = hideNavFooterPages.includes(location.pathname) ? '' : 'px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]';
+  const containerClasses = hideNavFooterPages.includes(location.pathname)
+    ? ''
+    : 'px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]';
 
   return (
     <div className={containerClasses}>
@@ -35,7 +47,19 @@ const App = () => {
         <Route path="/place-order" element={<PlaceOrder />} />
         <Route path="/orders" element={<Orders />} />
       </Routes>
+      <FloatingDockWrapper items={Items} />
       {!hideNavFooterPages.includes(location.pathname) && <Footer />}
+    </div>
+  );
+};
+
+// FloatingDockWrapper ensures the FloatingDock stays sticky at the bottom
+const FloatingDockWrapper = ({ items }) => {
+  return (
+    <div className="fixed md:hidden bottom-5 left-0 right-0 z-50 bg-transparent dark:bg-neutral-900 w-auto">
+      <div className='flex items-center justify-center w-full bg-transparent'>
+        <FloatingDock items={items} className="w-auto max-w-[500px] translate-y-20 bg-transparent" />
+      </div>
     </div>
   );
 };

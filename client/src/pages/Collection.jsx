@@ -119,7 +119,7 @@ const Collection = () => {
         <div className='md:overflow-auto md:max-h-[80vh]'>
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
             {
-              loading ?
+              loading || filterProducts.length === 0 ?
                 Array.from({ length: 8 }).map((_, index) => (
                   <div key={index} className="animate-pulse">
                     <div className="overflow-hidden bg-gray-300 h-48 w-full rounded-md"></div>
