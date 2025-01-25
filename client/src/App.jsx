@@ -14,7 +14,6 @@ import Footer from './components/Footer';
 import SearchBar from './components/SearchBar';
 import { ToastContainer } from 'react-toastify';
 import { FloatingDock } from './components/FloatingDock';
-// import { IconHomeFilled, IconHanger2Filled, IconPhoneFilled } from '@tabler/icons-react';
 import { House, Shirt, BookOpen, Phone } from 'lucide-react';
 
 const Items = [
@@ -47,7 +46,7 @@ const App = () => {
         <Route path="/place-order" element={<PlaceOrder />} />
         <Route path="/orders" element={<Orders />} />
       </Routes>
-      <FloatingDockWrapper items={Items} />
+      {!hideNavFooterPages.includes(location.pathname) && <FloatingDockWrapper items={Items} />}
       {!hideNavFooterPages.includes(location.pathname) && <Footer />}
     </div>
   );
@@ -56,7 +55,7 @@ const App = () => {
 // FloatingDockWrapper ensures the FloatingDock stays sticky at the bottom
 const FloatingDockWrapper = ({ items }) => {
   return (
-    <div className="fixed md:hidden bottom-5 left-0 right-0 z-50 bg-transparent dark:bg-neutral-900 w-auto">
+    <div className="fixed md:hidden bottom-2 left-0 right-0 z-50 bg-transparent dark:bg-neutral-900 w-auto">
       <div className='flex items-center justify-center w-full bg-transparent'>
         <FloatingDock items={items} className="w-auto max-w-[500px] translate-y-20 bg-transparent" />
       </div>

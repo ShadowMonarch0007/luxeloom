@@ -33,7 +33,7 @@ const Footer = () => {
             </div>
             <div>
                 <hr />
-                <p className='py-5 text-sm text-center'>Copyright 2025@ luxeloom.vercel.app - All Right Reserved.</p>
+                <p className='py-5 text-sm text-center mb-16 md:mb-0'>Copyright 2025@ luxeloom.vercel.app - All Right Reserved.</p>
             </div>
         </div>
     )
