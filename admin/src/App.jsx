@@ -8,8 +8,9 @@ import Orders from './pages/Orders';
 import Login from './pages/Login';
 import { ToastContainer } from 'react-toastify';
 import Subscriber from './pages/Subscriber';
-import Review from './pages/Review';
+import Users from './pages/Users';
 import Message from './pages/message';
+import Dashboard from './pages/Dashboard';
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL;
 export const currency= '₹';
@@ -34,11 +35,12 @@ const App = () => {
             <Sidebar />
             <div className="w-[70%] h-full overflow-auto mx-auto ml-[max(5vw,25px)] my-8 pb-10 text-gray-600 text-base">
               <Routes>
+                <Route path="/" element={<Dashboard token={token} />} />
                 <Route path="/add" element={<Add token={token} />} />
                 <Route path="/list" element={<List token={token} />} />
                 <Route path="/order" element={<Orders token={token} />} />
                 <Route path="/subscriber" element={<Subscriber token={token} />} />
-                <Route path="/review" element={<Review token={token} />} />
+                <Route path="/user" element={<Users token={token} />} />
                 <Route path="/message" element={<Message token={token} />} />
               </Routes>
             </div>

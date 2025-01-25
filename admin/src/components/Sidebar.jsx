@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { assets } from '../assets/assets'
-import { Package, PackagePlus, ShoppingCart, LayoutDashboard, Podcast, Star, Mail } from 'lucide-react';
+import { Package, PackagePlus, ShoppingCart, LayoutDashboard, Podcast, Users, Mail } from 'lucide-react';
 
 const Sidebar = () => {
     return (
@@ -27,9 +27,9 @@ const Sidebar = () => {
                     <div><Podcast size={24} /></div>
                     <p className='hidden md:block'>Subscribers</p>
                 </NavLink>
-                <NavLink to={'/review'} className='flex items-center gap-3 border border-gray-300 border-r-0 px-3 py-2 rounded-lg'>
-                    <div><Star size={24} /></div>
-                    <p className='hidden md:block'>Reviews</p>
+                <NavLink to={'/user'} className='flex items-center gap-3 border border-gray-300 border-r-0 px-3 py-2 rounded-lg'>
+                    <div><Users size={24} /></div>
+                    <p className='hidden md:block'>Users</p>
                 </NavLink>
                 <NavLink to={'/message'} className='flex items-center gap-3 border border-gray-300 border-r-0 px-3 py-2 rounded-lg'>
                     <div><Mail size={24} /></div>

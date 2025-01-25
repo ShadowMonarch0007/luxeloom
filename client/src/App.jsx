@@ -15,6 +15,7 @@ import SearchBar from './components/SearchBar';
 import { ToastContainer } from 'react-toastify';
 import { FloatingDock } from './components/FloatingDock';
 import { House, Shirt, BookOpen, Phone } from 'lucide-react';
+import ScrollToTop from './components/ScrollToTop';
 
 const Items = [
   { title: 'Home', icon: <House />, href: '/' },
@@ -35,6 +36,7 @@ const App = () => {
       <ToastContainer />
       {!hideNavFooterPages.includes(location.pathname) && <Navbar />}
       {!hideNavFooterPages.includes(location.pathname) && <SearchBar />}
+      <ScrollToTop/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/collection" element={<Collection />} />

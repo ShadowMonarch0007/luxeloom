@@ -5,15 +5,8 @@ import { Link } from 'react-router-dom';
 const ProductItem = ({ id, image, name, price }) => {
     const { currency } = useContext(ShopContext);
 
-    const handleClick = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        });
-    };
-
     return (
-        <Link to={`/product/${id}`} onClick={handleClick} className="text-gray cursor-pointer">
+        <Link to={`/product/${id}`} className="text-gray cursor-pointer">
             <div className="overflow-hidden">
                 <img src={image[0]} alt="" className="hover:scale-110 transition ease-in-out" />
             </div>
