@@ -9,7 +9,7 @@ import Login from './pages/Login';
 import { ToastContainer } from 'react-toastify';
 import Subscriber from './pages/Subscriber';
 import Users from './pages/Users';
-import Message from './pages/message';
+import Message from './pages/Message';
 import Dashboard from './pages/Dashboard';
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL;
