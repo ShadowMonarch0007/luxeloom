@@ -16,7 +16,7 @@ import { ToastContainer } from 'react-toastify';
 import { FloatingDock } from './components/FloatingDock';
 import { House, Shirt, BookOpen, Phone } from 'lucide-react';
 import ScrollToTop from './components/ScrollToTop';
-import Verify from './pages/verify';
+import Verify from './pages/Verify';
 
 const Items = [
   { title: 'Home', icon: <House />, href: '/' },
