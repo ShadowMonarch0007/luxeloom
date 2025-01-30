@@ -16,6 +16,7 @@ import { ToastContainer } from 'react-toastify';
 import { FloatingDock } from './components/FloatingDock';
 import { House, Shirt, BookOpen, Phone } from 'lucide-react';
 import ScrollToTop from './components/ScrollToTop';
+import Verify from './pages/verify';
 
 const Items = [
   { title: 'Home', icon: <House />, href: '/' },
@@ -47,6 +48,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/place-order" element={<PlaceOrder />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/verify" element={<Verify />} />
       </Routes>
       {!hideNavFooterPages.includes(location.pathname) && <FloatingDockWrapper items={Items} />}
       {!hideNavFooterPages.includes(location.pathname) && <Footer />}
