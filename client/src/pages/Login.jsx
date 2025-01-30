@@ -74,7 +74,7 @@ const Login = () => {
         }
         <div className='text-xs sm:text-sm mt-4 flex gap-1 justify-end items-end'>
           <p>Are you an admin?</p>
-          <a href='http://localhost:5174' target='_blank' rel="noopener noreferrer" className='text-[#57201b]/70'>Login</a>
+          <a href='https://luxeloom-admin.vercel.app' target='_blank' rel="noopener noreferrer" className='text-[#57201b]/70'>Login</a>
         </div>
       </form>
     </AuthUi>
