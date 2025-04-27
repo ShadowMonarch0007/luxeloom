@@ -96,7 +96,7 @@ const List = ({ token }) => {
                 <p>{item.name}</p>
                 <p>{item.category}</p>
                 <p>{currency} {(85 * item.price) - 1}</p>
-                <p onClick={() => removeProduct(item._id)} className='flex justify-center cursor-pointer '><Trash2 size={24} /></p>
+                <p onClick={() => removeProduct(item._id)} className='flex justify-center cursor-pointer text-red-500 hover:text-red-700'><Trash2 size={24} /></p>
               </div>
             </div>
           ))
@@ -110,7 +110,7 @@ const List = ({ token }) => {
                   <p className='w-full truncate'>{item.name}</p>
                   <p className='w-full flex items-center justify-start'>{item.category}</p>
                   <p className='w-full flex items-center justify-start'>{currency} {(85 * item.price) - 1}</p>
-                  <p onClick={() => removeProduct(item._id)} className='w-full flex items-center justify-end cursor-pointer '><Trash2 size={24} /></p>
+                  <p onClick={() => removeProduct(item._id)} className='w-full flex items-center justify-end cursor-pointer text-red-500 hover:text-red-700'><Trash2 size={24} /></p>
                 </div>
               </div>
             </div>
