@@ -31,8 +31,7 @@ const Message = ({ token }) => {
       <p className="mb-2 font-semibold text-xl">All Messages</p>
       <div className="space-y-4">
         {loading ? (
-          // Skeleton Loading
-          Array.from({ length: 3 }).map((_, idx) => (
+          Array.from({ length: 4 }).map((_, idx) => (
             <div
               key={idx}
               className="p-4 border rounded-lg shadow-sm animate-pulse space-y-2"
@@ -65,7 +64,7 @@ const Message = ({ token }) => {
             </div>
           ))
         ) : (
-          Array.from({ length: 3 }).map((_, idx) => (
+          Array.from({ length: 4 }).map((_, idx) => (
             <div
               key={idx}
               className="p-4 border rounded-lg shadow-sm animate-pulse space-y-2"

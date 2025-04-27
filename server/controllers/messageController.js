@@ -24,4 +24,14 @@ const listMessages = async (req, res) => {
     }
 }
 
-export { addMessage, listMessages };
+const removeMessages = async (req, res) => {
+    try {
+        await messageModel.findByIdAndDelete(req.body.id);
+        res.json({ success: true, messages: "Message deleted successfuly." });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+export { addMessage, listMessages, removeMessages };
