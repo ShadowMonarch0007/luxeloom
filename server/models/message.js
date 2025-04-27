@@ -6,7 +6,7 @@ const messageSchema = new mongoose.Schema({
     phone: { type: String, required: true },
     text: { type: String, required: true },
     status: { type: Boolean, default: false },
-    date: { type: Number, default: Date.now() }
+    date: { type: Number, required: true },
 });
 
 const messageModel = mongoose.models.messages || mongoose.model("messages", messageSchema);
