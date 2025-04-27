@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import Title from '../components/Title'
 import { assets } from '../assets/assets'
 import NewsLetterBox from '../components/NewsLetterBox'
@@ -32,7 +32,7 @@ const Contact = () => {
 
   const [loading, setLoading] = useState(false); // State to track loading
   const textareaRef = useRef(null);
-  const { backendUrl } = ShopContext
+  const { backendUrl } = useContext(ShopContext);
 
   const handleInput = () => {
     const textarea = textareaRef.current;
