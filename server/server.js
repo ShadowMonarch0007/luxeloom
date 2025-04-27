@@ -8,6 +8,7 @@ import productRouter from './routes/productRoutes.js'
 import subscriberRouter from './routes/subscriberRoutes.js'
 import cartRouter from './routes/cartRoutes.js'
 import orderRouter from './routes/orderRoutes.js'
+import messageRouter from './routes/messageRoutes.js'
 
 const app = express()
 const port = process.env.PORT || 4000
@@ -22,6 +23,7 @@ app.use('/api/product',productRouter)
 app.use('/api/subscriber',subscriberRouter)
 app.use('/api/cart', cartRouter)
 app.use('/api/order', orderRouter)
+app.use('/api/message',messageRouter)
 
 app.get('/', (req, res) => {
     res.send("API Working")
