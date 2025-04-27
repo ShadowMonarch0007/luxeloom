@@ -47,7 +47,7 @@ const Subscriber = ({ token }) => {
 
   return (
     <div>
-      <p className='mb-2 font-semibold'>All Subscribers List</p>
+      <p className='mb-2 font-semibold text-xl'>All Subscribers</p>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
         <div className='col-span-1 grid grid-cols-[3fr_1fr] items-center py-2 px-4 border bg-gray-100 text-sm font-bold'>
           <span>Subscribers</span>

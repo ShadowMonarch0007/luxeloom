@@ -76,8 +76,31 @@ const adminLogin = async (req, res) => {
     }
 }
 
+const listUsers = async (req, res) => {
+    try {
+        const users = await userModel.find({})
+        res.json({ success: true, users })
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+const removeUser = async (req, res) => {
+    try {
+        await userModel.findByIdAndDelete(req.body.id)
+        res.json({ success: true, message: "User Removed Successfully!" })
+    }
+    catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
 export {
     loginUser,
     registerUser,
     adminLogin,
+    listUsers,
+    removeUser,
 };

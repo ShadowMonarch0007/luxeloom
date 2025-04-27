@@ -49,7 +49,7 @@ const List = ({ token }) => {
 
   return (
     <div>
-      <p className='mb-2'>All Products List</p>
+      <p className='mb-2 font-semibold text-xl'>All Products</p>
       <div className='flex flex-col gap-2'>
         <div className='hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center py-1 px-2 border bg-gray-100 text-sm'>
           <b>Image</b>
