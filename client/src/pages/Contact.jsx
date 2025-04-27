@@ -3,9 +3,9 @@ import Title from '../components/Title'
 import { assets } from '../assets/assets'
 import NewsLetterBox from '../components/NewsLetterBox'
 import axios from 'axios'
-import { backendUrl } from '../../../admin/src/App'
 import { toast } from 'react-toastify'
 import { Loader2, Send } from 'lucide-react' // Import the loader icon from Lucide
+import { ShopContext } from '../context/ShopContext'
 
 const items = [
   {
@@ -32,6 +32,7 @@ const Contact = () => {
 
   const [loading, setLoading] = useState(false); // State to track loading
   const textareaRef = useRef(null);
+  const { backendUrl } = ShopContext
 
   const handleInput = () => {
     const textarea = textareaRef.current;
