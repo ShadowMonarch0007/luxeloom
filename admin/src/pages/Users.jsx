@@ -69,7 +69,7 @@ const Users = ({ token }) => {
               </button>
               <button
                 onClick={() => removeUser(confirmDeleteUser._id)}
-                className="px-4 py-2 rounded-md bg-red-500 hover:bg-red-600 text-white text-sm flex items-center gap-2"
+                className="px-4 py-2 rounded-md bg-red-500 hover:bg-red-600 text-white text-sm flex items-center gap-2 min-w-[80px]"
                 disabled={confirmLoading}
               >
                 {confirmLoading ? (

@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { backendUrl } from '../App';
+import { Trash2, Loader2 } from 'lucide-react';
 
 const Message = ({ token }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [messageToDelete, setMessageToDelete] = useState(null);
 
   const fetchMessages = async () => {
     try {
@@ -20,6 +23,39 @@ const Message = ({ token }) => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const removeMessage = async (id) => {
+    setConfirmLoading(true);
+    try {
+      const response = await axios.post(`${backendUrl}/api/message/remove`, { id }, { headers: { token } });
+      if (response.data.success) {
+        toast.success("Message deleted successfuly!");
+        await fetchMessages(); // Update the list after successful removal
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message);
+    } finally {
+      setConfirmLoading(false);
+      setMessageToDelete(null); // Close confirmation modal
+    }
+  };
+
+  const handleDeleteClick = (id) => {
+    setMessageToDelete(id); // Show the confirmation modal
+  };
+
+  const handleConfirmDelete = () => {
+    if (messageToDelete) {
+      removeMessage(messageToDelete);
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setMessageToDelete(null); // Close confirmation modal
   };
 
   useEffect(() => {
@@ -45,39 +81,61 @@ const Message = ({ token }) => {
           ))
         ) : messages.length > 0 ? (
           messages.map((msg) => (
-            <div key={msg._id} className="p-4 border rounded-lg shadow-sm">
+            <div key={msg._id} className="p-4 border rounded-lg shadow-sm relative">
               <p><strong>Name:</strong> {msg.name}</p>
               <p><strong>Email:</strong> {msg.email}</p>
               <p><strong>Phone:</strong> {msg.phone}</p>
               <p><strong>Message:</strong> {msg.text}</p>
               <p className="text-sm text-gray-500">
                 {new Date(msg.date).toLocaleString('en-US', {
-                  weekday: 'long', // 'Monday'
-                  year: 'numeric', // '2025'
-                  month: 'long', // 'April'
-                  day: 'numeric', // '28'
-                  hour: '2-digit', // '04 PM'
-                  minute: '2-digit', // '30'
-                  second: '2-digit' // '15'
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  second: '2-digit',
                 })}
               </p>
+              <div className='absolute top-5 right-5'>
+                <button
+                  className="text-red-500 hover:text-red-700"
+                  onClick={() => handleDeleteClick(msg._id)} // Open confirmation modal
+                  disabled={confirmLoading}
+                >
+                  <Trash2 size={24} />
+                </button>
+              </div>
             </div>
           ))
         ) : (
-          Array.from({ length: 4 }).map((_, idx) => (
-            <div
-              key={idx}
-              className="p-4 border rounded-lg shadow-sm animate-pulse space-y-2"
-            >
-              <div className="h-4 bg-gray-300 rounded w-1/3"></div>
-              <div className="h-4 bg-gray-300 rounded w-2/3"></div>
-              <div className="h-4 bg-gray-300 rounded w-1/2"></div>
-              <div className="h-4 bg-gray-300 rounded w-full"></div>
-              <div className="h-3 bg-gray-200 rounded w-1/4"></div>
-            </div>
-          ))
+          <p>No messages available.</p>
         )}
       </div>
+
+      {/* Confirmation Modal */}
+      {messageToDelete && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <p className="text-lg font-semibold">Are you sure you want to delete this message?</p>
+            <div className="mt-4 flex justify-end space-x-2">
+              <button
+                className="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
+                onClick={handleCancelDelete}
+              >
+                Cancel
+              </button>
+              <button
+                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 min-w-[80px] flex items-center justify-center"
+                onClick={handleConfirmDelete}
+                disabled={confirmLoading}
+              >
+                {confirmLoading ? <Loader2 className='animate-spin text-center' /> : 'Delete'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
