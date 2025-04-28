@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: "info.luxeloom.shop@gmail.com",
+        user: "luxeloom.shop.help@gmail.com",
         pass: process.env.MAIL_PASSWORD,
     },
 });
@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 async function sendMail(to, subject, text, html) {
     try {
         const info = await transporter.sendMail({
-            from: 'info.luxeloom.shop@gmail.com',
+            from: 'luxeloom.shop.help@gmail.com',
             to,
             subject,
             text,
