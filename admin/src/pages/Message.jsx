@@ -10,6 +10,7 @@ const Message = ({ token }) => {
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [messageToDelete, setMessageToDelete] = useState(null);
   const [replyLoading, setReplyLoading] = useState(false);
+  const [replies, setReplies] = useState(""); // Track replies by message id
   
   const fetchMessages = async () => {
     try {
@@ -76,7 +77,11 @@ const Message = ({ token }) => {
     } finally {
       setReplyLoading(false);
     }
-  }
+  };
+
+  const handleReplyChange = (value) => {
+    setReplies(value);
+  };
 
   useEffect(() => {
     fetchMessages();
@@ -117,7 +122,7 @@ const Message = ({ token }) => {
                   second: '2-digit',
                 })}
               </p>
-              <div className='absolute top-5 right-5'>
+              <div className="absolute top-5 right-5">
                 <button
                   className="text-red-500 hover:text-red-700"
                   onClick={() => handleDeleteClick(msg._id)} // Open confirmation modal
@@ -126,18 +131,20 @@ const Message = ({ token }) => {
                   <Trash2 size={24} />
                 </button>
               </div>
-              <div className='mt-2 my-2 border-gray-500/50 rounded-md flex items-center h-full'>
+              <div className="mt-2 my-2 border-gray-500/50 rounded-md flex items-center h-full">
                 <input
                   type="text"
                   disabled={msg.status}
-                  placeholder='Enter the reply...'
-                  className='w-full focus:outline-none text-gray-500 placeholder:text-gray-500/50 p-2 rounded-l-md'
+                  placeholder="Enter the reply..."
+                  className="w-full focus:outline-none text-gray-500 placeholder:text-gray-500/50 p-2 rounded-l-md"
+                  value={replies[msg._id] || ''} // Bind the reply value to the input field
+                  onChange={(e) => handleReplyChange(e.target.value)} // Capture the typed value
                 />
                 <button
                   type="submit"
-                  className='px-4 py-2 text-sm bg-[#b28878] text-white transition-all rounded-md mt-0 ml-2 flex items-center justify-center w-fit h-full active:scale-75 active:duration-300 active:ease-in-out'
+                  className="px-4 py-2 text-sm bg-[#b28878] text-white transition-all rounded-md mt-0 ml-2 flex items-center justify-center w-fit h-full active:scale-75 active:duration-300 active:ease-in-out"
                   disabled={replyLoading || msg.status}
-                  onClick={() => generateReply(msg._id, msg.reply)} // Pass reply as argument
+                  onClick={() => generateReply(msg._id, replies || '')} // Use the value from the input field
                 >
                   {replyLoading ? <Loader2 className="animate-spin w-5 h-5" /> : <Send className="size-6" />}
                 </button>
@@ -166,7 +173,7 @@ const Message = ({ token }) => {
                 onClick={handleConfirmDelete}
                 disabled={confirmLoading}
               >
-                {confirmLoading ? <Loader2 className='animate-spin text-center' /> : 'Delete'}
+                {confirmLoading ? <Loader2 className="animate-spin text-center" /> : 'Delete'}
               </button>
             </div>
           </div>
