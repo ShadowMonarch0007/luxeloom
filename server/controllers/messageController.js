@@ -1,5 +1,4 @@
-import sendMailModule from "../helper/sendMail.cjs";
-const { sendMail } = sendMailModule;
+import {sendMail} from "../helper/sendMail.js";
 
 import messageModel from "../models/message.js";
 
