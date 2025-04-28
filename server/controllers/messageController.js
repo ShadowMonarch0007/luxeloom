@@ -62,7 +62,7 @@ const addMessage = async (req, res) => {
           <p style="margin-bottom: 0;">
             Warm regards,<br>
             <strong>The Luxeloom Team</strong><br>
-            <a href="https://luxeloom.com" style="color: #b76e79; text-decoration: none;">luxeloom.com</a>
+            <a href="https://luxeloom-shop.vercel.app/" style="color: #b76e79; text-decoration: none;">luxeloom-shop.vercel.app</a>
           </p>
   
         </div>
@@ -161,14 +161,14 @@ https://luxeloom.com
             Thank you for reaching out to <strong>Luxeloom</strong>. Here’s our reply to your message:
           </p>
 
-          <div style="background-color: #f0f8f5; padding: 18px 20px; border: 1px solid #b76e79; border-radius: 8px; margin-bottom: 25px;">
-            <p style="margin: 0; font-weight: bold; color: #333;">Our Reply:</p>
-            <p style="margin-top: 10px; color: #555;">"${reply}"</p>
-          </div>
-
           <div style="background-color: #f9f9f9; padding: 18px 20px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 25px;">
             <p style="margin: 0; font-weight: bold; color: #777;">Your Original Message:</p>
             <p style="margin-top: 10px; color: #555;">"${text}"</p>
+          </div>
+
+          <div style="background-color: #f0f8f5; padding: 18px 20px; border: 1px solid #b76e79; border-radius: 8px; margin-bottom: 25px;">
+            <p style="margin: 0; font-weight: bold; color: #333;">Our Reply:</p>
+            <p style="margin-top: 10px; color: #555;">"${reply}"</p>
           </div>
 
           <p style="margin-bottom: 20px;">
@@ -180,7 +180,7 @@ https://luxeloom.com
           <p style="margin-bottom: 0;">
             Warm regards,<br>
             <strong>The Luxeloom Team</strong><br>
-            <a href="https://luxeloom.com" style="color: #b76e79; text-decoration: none;">luxeloom.com</a>
+            <a href="https://luxeloom-shop.vercel.app/" style="color: #b76e79; text-decoration: none;">luxeloom-shop.vercel.app</a>
           </p>
 
         </div>

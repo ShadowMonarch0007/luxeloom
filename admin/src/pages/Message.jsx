@@ -137,23 +137,44 @@ const Message = ({ token }) => {
                   <Trash2 size={24} />
                 </button>
               </div>
-              <div className="mt-2 my-2 border-gray-500/50 rounded-md flex items-center h-full">
-                <input
-                  type="text"
-                  disabled={msg.status}
-                  placeholder="Enter the reply..."
-                  className="w-full focus:outline-none text-gray-500 placeholder:text-gray-500/50 p-2 rounded-l-md"
-                  onChange={(e) => handleReplyChange(e.target.value)} // Capture the typed value
-                />
-                <button
-                  type="submit"
-                  className="px-4 py-2 text-sm bg-[#b28878] text-white transition-all rounded-md mt-0 ml-2 flex items-center justify-center w-fit h-full active:scale-75 active:duration-300 active:ease-in-out"
-                  disabled={replyLoading || msg.status}
-                  onClick={() => generateReply(msg._id, replies)} // Use the value from the input field
-                >
-                  {replyLoading ? <Loader2 className="animate-spin w-5 h-5" /> : <Send className="size-6" />}
-                </button>
-              </div>
+              {
+                !msg.status ? (
+                  <div className="mt-2 my-2 border-gray-500/50 rounded-md flex items-center h-full">
+                    <input
+                      type="text"
+                      disabled={msg.status}
+                      placeholder="Enter the reply..."
+                      className="w-full focus:outline-none text-gray-500 placeholder:text-gray-500/50 p-2 rounded-l-md"
+                      onChange={(e) => handleReplyChange(e.target.value)} // Capture the typed value
+                    />
+                    <button
+                      type="submit"
+                      className="px-4 py-2 text-sm bg-[#b28878] text-white transition-all rounded-md mt-0 ml-2 flex items-center justify-center w-fit h-full active:scale-75 active:duration-300 active:ease-in-out"
+                      disabled={replyLoading || msg.status}
+                      onClick={() => generateReply(msg._id, replies)} // Use the value from the input field
+                    >
+                      {replyLoading ? <Loader2 className="animate-spin w-5 h-5" /> : <Send className="size-6" />}
+                    </button>
+                  </div>
+                ) : (
+                  <div className="mt-2 my-2 border-gray-500/50 rounded-md flex flex-col items-center h-full">
+                    <div
+                      className="w-full focus:outline-none text-gray-500 placeholder:text-gray-500/50 p-2 rounded-md border border-[#b28878]"
+                    >{msg.reply}</div>
+                    <div className='w-full text-right text-xs'>
+                      {new Date(msg.replyDate).toLocaleString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                      })}
+                    </div>
+                  </div>
+                )
+              }
             </div>
           ))
         ) : (
