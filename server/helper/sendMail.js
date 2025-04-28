@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
-    host: "smtp.gmail.email",
+    host: "smtp.gmail.com",
     secure: true, // true for port 465, false for other ports
     auth: {
         user: "info.luxeloom.shop@gmail.com",
