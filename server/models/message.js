@@ -7,6 +7,8 @@ const messageSchema = new mongoose.Schema({
     text: { type: String, required: true },
     status: { type: Boolean, default: false },
     date: { type: Number, required: true },
+    reply: { type: String, default: "" },
+    replyDate: { type: Number, default: 0 },
 });
 
 const messageModel = mongoose.models.messages || mongoose.model("messages", messageSchema);

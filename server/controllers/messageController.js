@@ -100,4 +100,100 @@ const removeMessages = async (req, res) => {
     }
 }
 
-export { addMessage, listMessages, removeMessages };
+const generateReply = async (req, res) => {
+    try {
+        const { id, reply } = req.body;
+
+        const message = await messageModel.findById(id);
+
+        if (!message) {
+            return res.status(404).json({ success: false, message: "Message not found." });
+        }
+
+        if (message.status) {
+            return res.status(400).json({ success: false, message: "Reply has already been sent." });
+        }
+
+        // Update message fields
+        message.reply = reply;
+        message.replyDate = Date.now();
+        message.status = true;
+
+        await message.save();
+
+        // Prepare and send the email
+        const { name, email, text } = message;
+
+        const subject = "Re: Your Message to Luxeloom";
+
+        const plainText = `Hello ${name},
+
+Thank you for contacting Luxeloom!
+
+Here’s our reply to your message:
+
+"${reply}"
+
+---
+Your original message:
+"${text}"
+
+If you have any further questions, feel free to reply to this email.
+
+Warm regards,
+Luxeloom Support Team
+https://luxeloom.com
+`;
+
+        const htmlContent = `
+        <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 30px 25px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; color: #555; border: 1px solid #e0e0e0; border-radius: 12px;">
+          
+          <div style="text-align: center; margin-bottom: 30px;">
+            <a href="https://luxeloom.com" style="text-decoration: none;">
+              <h1 style="font-size: 28px; color: #b76e79; margin: 0;">Luxeloom</h1>
+            </a>
+            <p style="color: #aaa; font-size: 14px; margin-top: 6px;">Luxury Redefined</p>
+          </div>
+
+          <p style="margin-bottom: 20px;">Hello ${name},</p>
+
+          <p style="margin-bottom: 20px;">
+            Thank you for reaching out to <strong>Luxeloom</strong>. Here’s our reply to your message:
+          </p>
+
+          <div style="background-color: #f0f8f5; padding: 18px 20px; border: 1px solid #b76e79; border-radius: 8px; margin-bottom: 25px;">
+            <p style="margin: 0; font-weight: bold; color: #333;">Our Reply:</p>
+            <p style="margin-top: 10px; color: #555;">"${reply}"</p>
+          </div>
+
+          <div style="background-color: #f9f9f9; padding: 18px 20px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 25px;">
+            <p style="margin: 0; font-weight: bold; color: #777;">Your Original Message:</p>
+            <p style="margin-top: 10px; color: #555;">"${text}"</p>
+          </div>
+
+          <p style="margin-bottom: 20px;">
+            If you have any further questions, feel free to reply to this email. We're always happy to assist you.
+          </p>
+
+          <p style="margin-bottom: 30px;">Thank you for choosing Luxeloom!</p>
+
+          <p style="margin-bottom: 0;">
+            Warm regards,<br>
+            <strong>The Luxeloom Team</strong><br>
+            <a href="https://luxeloom.com" style="color: #b76e79; text-decoration: none;">luxeloom.com</a>
+          </p>
+
+        </div>
+        `;
+
+        await sendMail(email, subject, plainText, htmlContent);
+
+        res.json({ success: true, message: "Reply sent and message updated successfully.", data: message });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+}
+
+export { addMessage, listMessages, removeMessages, generateReply };

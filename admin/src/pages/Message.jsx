@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { backendUrl } from '../App';
-import { Trash2, Loader2 } from 'lucide-react';
+import { Trash2, Loader2, Send } from 'lucide-react';
 
 const Message = ({ token }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [messageToDelete, setMessageToDelete] = useState(null);
-
+  const [replyLoading, setReplyLoading] = useState(false);
+  
   const fetchMessages = async () => {
     try {
       const response = await axios.get(backendUrl + '/api/message/list', { headers: { token } });
@@ -30,7 +31,7 @@ const Message = ({ token }) => {
     try {
       const response = await axios.post(`${backendUrl}/api/message/remove`, { id }, { headers: { token } });
       if (response.data.success) {
-        toast.success("Message deleted successfuly!");
+        toast.success("Message deleted successfully!");
         await fetchMessages(); // Update the list after successful removal
       } else {
         toast.error(response.data.message);
@@ -58,6 +59,25 @@ const Message = ({ token }) => {
     setMessageToDelete(null); // Close confirmation modal
   };
 
+  // Updated generateReply function for frontend
+  const generateReply = async (id, reply) => {
+    setReplyLoading(true);
+    try {
+      const response = await axios.post(`${backendUrl}/api/message/reply`, { id, reply }, { headers: { token } });
+      if (response.data.success) {
+        toast.success("Reply sent successfully!");
+        await fetchMessages(); // Update the list after successful reply
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message);
+    } finally {
+      setReplyLoading(false);
+    }
+  }
+
   useEffect(() => {
     fetchMessages();
   }, []);
@@ -81,7 +101,7 @@ const Message = ({ token }) => {
           ))
         ) : messages.length > 0 ? (
           messages.map((msg) => (
-            <div key={msg._id} className="p-4 border rounded-lg shadow-sm relative">
+            <div key={msg._id} className={`p-4 border rounded-lg shadow-sm relative ${msg.status ? 'opacity-60' : 'opacity-100'}`}>
               <p><strong>Name:</strong> {msg.name}</p>
               <p><strong>Email:</strong> {msg.email}</p>
               <p><strong>Phone:</strong> {msg.phone}</p>
@@ -104,6 +124,22 @@ const Message = ({ token }) => {
                   disabled={confirmLoading}
                 >
                   <Trash2 size={24} />
+                </button>
+              </div>
+              <div className='mt-2 my-2 border-gray-500/50 rounded-md flex items-center h-full'>
+                <input
+                  type="text"
+                  disabled={msg.status}
+                  placeholder='Enter the reply...'
+                  className='w-full focus:outline-none text-gray-500 placeholder:text-gray-500/50 p-2 rounded-l-md'
+                />
+                <button
+                  type="submit"
+                  className='px-4 py-2 text-sm bg-[#b28878] text-white transition-all rounded-md mt-0 ml-2 flex items-center justify-center w-fit h-full active:scale-75 active:duration-300 active:ease-in-out'
+                  disabled={replyLoading || msg.status}
+                  onClick={() => generateReply(msg._id, msg.reply)} // Pass reply as argument
+                >
+                  {replyLoading ? <Loader2 className="animate-spin w-5 h-5" /> : <Send className="size-6" />}
                 </button>
               </div>
             </div>
