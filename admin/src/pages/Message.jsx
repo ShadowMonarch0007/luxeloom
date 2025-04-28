@@ -11,7 +11,7 @@ const Message = ({ token }) => {
   const [messageToDelete, setMessageToDelete] = useState(null);
   const [replyLoading, setReplyLoading] = useState(false);
   const [replies, setReplies] = useState(""); // Track replies by message id
-  
+
   const fetchMessages = async () => {
     try {
       const response = await axios.get(backendUrl + '/api/message/list', { headers: { token } });
@@ -64,7 +64,11 @@ const Message = ({ token }) => {
   const generateReply = async (id, reply) => {
     setReplyLoading(true);
     try {
-      const response = await axios.post(`${backendUrl}/api/message/reply`, { id, reply }, { headers: { token } });
+      const requestBody = {
+        id,
+        reply
+      };
+      const response = await axios.post(`${backendUrl}/api/message/reply`, requestBody, { headers: { token } });
       if (response.data.success) {
         toast.success("Reply sent successfully!");
         await fetchMessages(); // Update the list after successful reply
@@ -82,6 +86,8 @@ const Message = ({ token }) => {
   const handleReplyChange = (value) => {
     setReplies(value);
   };
+
+  console.log(replies); // Log the replies state to see the current value
 
   useEffect(() => {
     fetchMessages();
@@ -137,14 +143,13 @@ const Message = ({ token }) => {
                   disabled={msg.status}
                   placeholder="Enter the reply..."
                   className="w-full focus:outline-none text-gray-500 placeholder:text-gray-500/50 p-2 rounded-l-md"
-                  value={replies[msg._id] || ''} // Bind the reply value to the input field
                   onChange={(e) => handleReplyChange(e.target.value)} // Capture the typed value
                 />
                 <button
                   type="submit"
                   className="px-4 py-2 text-sm bg-[#b28878] text-white transition-all rounded-md mt-0 ml-2 flex items-center justify-center w-fit h-full active:scale-75 active:duration-300 active:ease-in-out"
                   disabled={replyLoading || msg.status}
-                  onClick={() => generateReply(msg._id, replies || '')} // Use the value from the input field
+                  onClick={() => generateReply(msg._id, replies)} // Use the value from the input field
                 >
                   {replyLoading ? <Loader2 className="animate-spin w-5 h-5" /> : <Send className="size-6" />}
                 </button>
