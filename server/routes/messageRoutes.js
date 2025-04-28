@@ -7,7 +7,7 @@ const messageRouter = express.Router();
 messageRouter.post('/send', addMessage);
 messageRouter.get('/list', adminAuth, listMessages)
 messageRouter.post('/remove', adminAuth, removeMessages)
-messageRouter.post('reply', adminAuth, generateReply)
+messageRouter.post('/reply', adminAuth, generateReply)
 
 
 export default messageRouter;
