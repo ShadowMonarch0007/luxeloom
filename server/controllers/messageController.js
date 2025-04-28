@@ -1,4 +1,4 @@
-import { sendMail } from "../helper/sendMail.js";
+import { sendMail } from "../helper/sendMail.cjs";
 import messageModel from "../models/message.js";
 
 const addMessage = async (req, res) => {
