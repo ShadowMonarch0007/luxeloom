@@ -6,13 +6,14 @@ const transporter = nodemailer.createTransport({
     secure: true, // true for port 465, false for other ports
     auth: {
         user: "info.luxeloom.shop@gmail.com",
-        pass: process.env.MAIL_PASSWORD, // generated ethereal password
+        pass: "oornyxfgfgfexwnp", // generated ethereal password
     },
 });
 
 // async..await is not allowed in global scope, must use a wrapper
 async function sendMail(to, subject, text, html) {
     // send mail with defined transport object
+    console.log("Mail send")
     const info = await transporter.sendMail({
         from: 'info.luxeloom.shop@gmail.com', // sender address
         to, // list of receivers
