@@ -2,8 +2,7 @@ import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.email",
-  port: 587,
-  secure: false, // true for port 465, false for other ports
+  secure: true, // true for port 465, false for other ports
   auth: {
     user: "info.luxeloom.shop@gmail.com",
     pass: process.env.MAIL_PASSWORD, // generated ethereal password
