@@ -8,7 +8,12 @@ const addMessage = async (req, res) => {
         const date = Date.now();
         const message = new messageModel({ name, email, phone, text, date });
         await message.save();
-        await sendMail(email,"Thank you for your message", `Hi ${name},\n\nThank you for reaching out to us. We have received your message and will get back to you shortly.\n\nBest regards,\nLuxeloom Team`);
+        await sendMail(
+            email,
+            "Thank you for your message",
+            `Hi ${name},\n\nThank you for reaching out to us. We have received your message and will get back to you shortly.\n\nBest regards,\nLuxeloom Team`,
+            `<p>Hi ${name},</p><p>Thank you for reaching out to us. We have received your message and will get back to you shortly.</p><p>Best regards,<br>Luxeloom Team</p>`
+        );
         res.json({ success: true, message: "Message Sent Successfully!" });
     } catch (error) {
         console.log(error);
