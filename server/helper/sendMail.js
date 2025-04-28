@@ -16,6 +16,7 @@ async function sendMail(to, subject, text, html) {
             subject,
             text,
             html,
+            replyTo: 'info@luxeloom.shop',
         });
         console.log('Mail sent successfully:', info.messageId);
     } catch (error) {
