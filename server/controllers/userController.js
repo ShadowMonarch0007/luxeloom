@@ -157,7 +157,16 @@ const listUsers = async (req, res) => {
 
 const removeUser = async (req, res) => {
     try {
-        await userModel.findByIdAndDelete(req.body.id)
+        // Get user data first before deleting
+        const user = await userModel.findById(req.body.id);
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found." });
+        }
+
+        const { name, email } = user; // destructure needed fields
+
+        // Delete the user
+        await userModel.findByIdAndDelete(req.body.id);
 
         const subject = "Important Notice – Your Luxeloom Account Has Been Suspended";
 
@@ -227,13 +236,14 @@ https://luxeloom-shop.vercel.app/support
 
         await sendMail(email, subject, plainText, htmlContent);
 
-        res.json({ success: true, message: "User Removed Successfully!" })
+        res.json({ success: true, message: "User Removed Successfully!" });
     }
     catch (error) {
         console.log(error);
         res.json({ success: false, message: error.message });
     }
 }
+
 
 export {
     loginUser,
