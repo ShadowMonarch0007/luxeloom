@@ -15,7 +15,7 @@ const addSubscriber = async (req, res) => {
         await subscriber.save();
         const subject = "Welcome to Luxeloom – You’re In!";
 
-        const plainText = `Hello ${name},
+        const plainText = `Hello ${email},
 
 Thank you for subscribing to Luxeloom!
 
@@ -38,7 +38,7 @@ https://luxeloom-shop.vercel.app
     <p style="color: #aaa; font-size: 14px; margin-top: 6px;">Luxury Redefined</p>
   </div>
 
-  <p style="margin-bottom: 20px;">Hello ${name},</p>
+  <p style="margin-bottom: 20px;">Hello ${email},</p>
 
   <p style="margin-bottom: 20px;">
     Thank you for subscribing to <strong>Luxeloom</strong>!
