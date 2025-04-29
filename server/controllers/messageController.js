@@ -28,14 +28,14 @@ const addMessage = async (req, res) => {
   
   Best regards,
   Luxeloom Support Team
-  https://luxeloom.com
+  https://luxeloom-shop.vercel.app 
   `;
   
       const htmlContent = `
         <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 30px 25px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; color: #555; border: 1px solid #e0e0e0; border-radius: 12px;">
           
           <div style="text-align: center; margin-bottom: 30px;">
-            <a href="https://luxeloom.com" style="text-decoration: none;">
+            <a href="https://luxeloom-shop.vercel.app/" style="text-decoration: none;">
               <h1 style="font-size: 28px; color: #b76e79; margin: 0;">Luxeloom</h1>
             </a>
             <p style="color: #aaa; font-size: 14px; margin-top: 6px;">Luxury Redefined</p>
@@ -142,14 +142,14 @@ If you have any further questions, feel free to reply to this email.
 
 Warm regards,
 Luxeloom Support Team
-https://luxeloom.com
+https://luxeloom-shop.vercel.app 
 `;
 
         const htmlContent = `
         <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 30px 25px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; color: #555; border: 1px solid #e0e0e0; border-radius: 12px;">
           
           <div style="text-align: center; margin-bottom: 30px;">
-            <a href="https://luxeloom.com" style="text-decoration: none;">
+            <a href="https://luxeloom-shop.vercel.app/" style="text-decoration: none;">
               <h1 style="font-size: 28px; color: #b76e79; margin: 0;">Luxeloom</h1>
             </a>
             <p style="color: #aaa; font-size: 14px; margin-top: 6px;">Luxury Redefined</p>
