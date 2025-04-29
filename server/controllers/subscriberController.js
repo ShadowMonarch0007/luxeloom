@@ -1,3 +1,4 @@
+import { sendMail } from "../helper/sendMail.js";
 import subscriberModel from "../models/subscriberModel.js";
 import validator from 'validator'
 
